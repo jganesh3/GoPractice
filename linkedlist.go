@@ -45,6 +45,20 @@ func addNode(data int, head *Node) {
 
 func insertAt(val int, position int, head *Node) {
 
+	var parentptr *Node = head
+	childptr := head.getNext()
+
+	for i := 0; i < position-1 && parentptr != nil && childptr != nil; i++ {
+		parentptr = childptr
+		childptr = childptr.getNext()
+
+	}
+
+	parentptr.next = &Node{
+		data: val,
+		next: childptr,
+	}
+
 }
 
 func deleteNode(val int, head *Node) {
@@ -113,8 +127,19 @@ func main() {
 	addNode(30, header)
 	addNode(40, header)
 
-	deleteNode(40, header)
+	//deleteNode(40, header)
 	fmt.Println("")
 
+	printList(header)
+	fmt.Println("")
+
+	insertAt(22, 2, header)
+
+	printList(header)
+
+	insertAt(100, 100, header)
+	insertAt(101, 101, header)
+
+	fmt.Println("")
 	printList(header)
 }
